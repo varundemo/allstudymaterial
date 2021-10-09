@@ -10,7 +10,7 @@
    @section('content')  ........... @endsection
 7. Add a posts route for post.index file 
 
-2> Second -->
+2> Second --> (tailwindcss install, asset, up, down)
 
 1. Now install tailwind -->
   command --> npm install tailwindcss 
