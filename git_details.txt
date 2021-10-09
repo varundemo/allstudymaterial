@@ -46,3 +46,13 @@ You can create another file in the new brach
 >>>>>>> test
 To merge test branch in master brach
 command --> git merge branch_name
+Now add remote origin 
+copy command from the git hub repository
+now command --> git remote
+Now push origin copy command from the github
+Enter login and password
+If make changes to the files
+again use -> add, commit command 
+and the push command
+command --> git push
+command --> git pull   --> if someone other make changes to the project 
