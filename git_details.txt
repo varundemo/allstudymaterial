@@ -29,6 +29,6 @@ To write on it click I
 Now un-comment Initial commit 
 To get out from the vim editor use 'escape' and type :wq and 'enter'
 If make changes in the file need to add file again and commit again 
-To skip commit use command -->
+To commit and skip the vim editor use command -->
 command --> git commit -m 'changed git_details.html'     (You can add any comment in place of changed git_details.html)
- 
+
