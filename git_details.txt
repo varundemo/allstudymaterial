@@ -31,6 +31,16 @@ To get out from the vim editor use 'escape' and type :wq and 'enter'
 If make changes in the file need to add file again and commit again 
 To commit and skip the vim editor use command -->
 command --> git commit -m 'changed git_details.html'     (You can add any comment in place of changed git_details.html)
+<<<<<<< HEAD
 Now if you go to master branch you will not able to see the test brach you have created
 To add that file 
 command --> git merge foldername 
+=======
+If you don't want to include any file or folder in repository create .gitignore file and add file name or folder name 
+in it which you don't want to include 
+Create a new branch
+command --> git branch branch_name
+To move from one brach to other 
+command --> git checkout branch_name
+You can create another file in the new brach 
+>>>>>>> test
