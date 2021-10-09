@@ -1,0 +1,24 @@
+1> Go To git-scm.com
+Click download for window
+Now open the download and install
+while installing in Adjusting your path environment use the last option.
+Now install with default values
+After finish Launch git bash by check and uncheck other option
+Gitbash tool will open(like cmd)
+command --> git --version
+can open any folder by right click open gitbash here
+command --> git init   --> It will initialize the folder and create .git folder 
+To see .git folder go to --> view > options > view > show hidden files & unchecked file extensions for unknown file types
+and apply
+Now add name and email to the git -->
+command --> git config --global user.name 'Varun Kumar'
+git config --global user.email 'varunkumar11uee058@gmail.com'
+Now add your file in git repository or commit -->
+command --> git add test.html
+Now check status -->
+command --> git status 
+Now to remove the file form the repository
+command --> git rm --cached test.html 
+Another way to add
+command --> git add *.html   --> to add all the file with html extensions
+
