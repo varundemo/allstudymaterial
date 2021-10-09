@@ -28,7 +28,7 @@
  body with 'bg-gray-200', nav with 'p-6 bg-white flex justify-between mb-6', ul with 'flex items-center' , li, a with 'p-3'
   (home, dashboard, post) Another ul, li, a (name, login, register, logout)
 6. Now add content in posts>index.blade.php with tailwindcss
-  in section div with 'flex justify-content', div with 'w-8/12 bg-white p-6 rounded-lg' (post)     
+  in section div with 'flex justify-conter', div with 'w-8/12 bg-white p-6 rounded-lg' (post)     
 7. Now in migration files with 'up' and 'down' method 
 8. Add db connection name in .env file 
 9. command --> php aritsan migrate    
