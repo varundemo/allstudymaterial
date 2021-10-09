@@ -21,4 +21,14 @@ Now to remove the file form the repository
 command --> git rm --cached test.html 
 Another way to add
 command --> git add *.html   --> to add all the file with html extensions
-
+To add all files in git repository  -->
+command --> git add .
+Now to commit -->
+command --> git commit   --> It will open the Vim editor  
+To write on it click I 
+Now un-comment Initial commit 
+To get out from the vim editor use 'escape' and type :wq and 'enter'
+If make changes in the file need to add file again and commit again 
+To skip commit use command -->
+command --> git commit -m 'changed git_details.html'     (You can add any comment in place of changed git_details.html)
+ 
