@@ -1,0 +1,39 @@
+1> First --> (yield, extends, section)
+
+1. command --> php artisan   --> Tell you about the all the command in laravel 
+2. Create folder in view layouts > app.blade.php 
+3. Create folder in view posts > index.blade.php 
+4. Use @yield('content') in app.blade.php 
+5. In index.blade.php use -->
+  @extends('layouts.app') to get the code form the layout > app.blade.php file 
+6. To send data from app file to  index.blade.php yield function
+   @section('content')  ........... @endsection
+7. Add a posts route for post.index file 
+
+2> Second -->
+
+1. Now install tailwind -->
+  command --> npm install tailwindcss 
+  command --> npm install    --> to run package.json which have 'laravel-mix' dependency, which is used to pull tailwind
+  in laravel project also we will be able to use 'dev' command from package.json file 
+  command --> npm run dev   --> it will add css > app.css and js > app.js files in public folder
+2. All is manage by webpack.mix.js file in it add -->
+  require('tailwindcss')
+  Add base, component, utilities from tailwind doc and add in resources > css > app.css 
+  now run 
+  command --> npm run dev
+3. In public > css > app.css have all the tailwind code 
+4. Now link the app.css in posts>index file using 'asset' helper
+5. Now add Navbar with tailwind classes in app.blade.php -->
+ body with 'bg-gray-200', nav with 'p-6 bg-white flex justify-between mb-6', ul with 'flex items-center' , li, a with 'p-3'
+  (home, dashboard, post) Another ul, li, a (name, login, register, logout)
+6. Now add content in posts>index.blade.php with tailwindcss
+  in section div with 'flex justify-content', div with 'w-8/12 bg-white p-6 rounded-lg' (post)     
+7. Now in migration files with 'up' and 'down' method 
+8. Add db connection name in .env file 
+9. command --> php aritsan migrate    
+
+
+
+
+
