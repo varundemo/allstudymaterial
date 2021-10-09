@@ -44,3 +44,5 @@ To move from one brach to other
 command --> git checkout branch_name
 You can create another file in the new brach 
 >>>>>>> test
+To merge test branch in master brach
+command --> git merge branch_name
