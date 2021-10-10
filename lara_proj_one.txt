@@ -33,7 +33,7 @@
 8. Add db connection name in .env file 
 9. command --> php aritsan migrate   
 
-3> Third -->
+3> Third --> (create_column_migration, route(), password_confirmation)
 
 1. Migration To create column in the table
    command --> php artisan make:migration add_username_to_user_table 
@@ -45,7 +45,15 @@
 6. Make 'index' method there and return view 'auth.register'
 7. Define this controller method in route file.
 8. Make the view Auth > 'register.blade.php' copy the content of 'post.blade.php' to this file with change class w-4/12 
-to w-8/12      
+to w-8/12  
+9. Add named route {{ route('register') }} in navbar
+10. Make a form inside divs --> form add route 'register' in action 
+11. For inputs --> div with mb-4, label for=name with sr-only, input with 'bg-gray-100 border-2 w-full p-4 rounded-lg'
+12. Add similar intput for username, email, password 
+13. Add another input 'Password' again for it name is 'password_confirmation'  
+14. For Register button div, button with 'bg-blue-500 text-white px-4 py-3 rounded font-medium w-full' type='submit'
+15. Make a post route for RegisterController with 'store' method with no named route it will inherit the get route
+ named route.
 
 
 
