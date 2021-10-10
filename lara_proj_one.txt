@@ -93,7 +93,7 @@ to w-8/12
 17. Add login action in form with store method in controller    
 
 6> Sixth --> (with, session('status'), auth()->logout(), back(), middleware, authenticate class, middleware in constructor,
-middleware with only)
+middleware with only, auth middleware)
 
 1. Add same code for login controller as in register controller with some changes
 2. This time need to check the auth()->attempt() method in if statement to send user to route
@@ -101,7 +101,7 @@ middleware with only)
 4. To get this in view use --> @if(session('status')) session('status')  @endif
 5. Now for logout create logout controller and route 
 6. Add these route in navbar
-7. To logout --> auth()->logout(); and return redirect()->back('home');
+7. To logout --> auth()->logout(); and return redirect()->route('home');
 8. create route for home with only function
 9. create home view and copy code 
 10. Add logout button in navbar in form with post method with @csrf and type="submit" wiht form class 'inline p-3'
@@ -115,6 +115,30 @@ method which throw 'Authenticate exception'
 16. Can also define it in Controller like DashboardController in constructor method-->
       $this->middleware(['auth'])
 17. If only have to apply in some method we can use $this->middleware(['auth'])->only      
+
+7. Seventh --> (guest middleware, redirectifauthenticated, auth()->user->name, remember me, $request->remember, --help, -f)
+
+1. 'guest' middleware be apply for register controller. It will redirect to 'home' page.
+2. We can change the redirection to any other page from middleware > redirectifauthenticated > routeserviceprovider >
+   '/home'
+3. Apply same middleware for login form 
+4. Now show name on the navbar using 'auth()->user()->name' 
+5. Now under password remember me button  -->
+    div with mb-4, div with 'flex items-center', input name="remember" type="checkbox" class="mr-2", label with
+    remember me 
+6. get this value in LoginController > store method using '$request->remember'
+7. send this in 'auth()->attempt()' , this token will be saved in cookies and saved in database is well 
+8. Make a post controller 
+9. Create a route for post controller
+10. Return a view post.index 
+11. Add post route in navbar
+12. Create a post form in index page -->
+    form action="{route('posts')}" with @csrf, div with 'mb-4' , label with 'sr-only' Body , textarea name=body with 'bg-gray-100 
+    border-2 w-full p-4 rounded-lg' also @error inline and under it Also add button
+13. And add posts route for its store method 
+14. check model migration help with --help 
+15. create model with migration and factory -->
+     php artisan make:model Post -m -f         
 
 
 
