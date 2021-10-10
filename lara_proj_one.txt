@@ -69,7 +69,30 @@ to w-8/12
 8. Add {{ old('') }} in all input fields 
 9. Now store data in database using User model -->
     User::create()
-10. For create method we need to defined protected '$fillabe = [..., 'username']' in User Model        
+10. For create method we need to defined protected '$fillabe = [..., 'username']' in User Model      
+
+5> Fifth  --> (Hash, Facades, redirect, auth()->user(), auth()->attemp(), $request->only(), @auth, @guest)
+
+1. now send data in create function.
+2. Use Hash::make('') facade in to hash password
+3. Facades are 'front of underline funcitonality, shortcut to accessing function'
+5. Add controller and route for dashboard page with index method and named route 
+6. auth()->user()  --> auth helper returns the current signed in User model 
+7. To signed user in use --> auth()->attempt($request->only('email','password'))
+8. To check this is working check in controller --> 'dd(auth()->user())'  -->
+   If it is returning current user object 'auth()->attemp()' is working fine.
+9. Now redirect user to page --> return redirect()->route('dashboard')
+10. Paste post > index code in 'dashboard' view
+11. To check auth()->user() in blade files in app.blade.php -->
+    can use --> @if(auth()->user()) name, logout    @else  login, register    @endif 
+12. We can use @auth @endauth and @guest @endguest 
+13. Now Create Auth\LoginController 
+14. Also create get and post route for it 
+15. Create function with view('auth.login') 
+16. Copy paste code from register to login with only email and password
+17. Add login action in form with store method in controller    
+
+
 
 
 
