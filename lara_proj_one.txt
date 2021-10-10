@@ -31,7 +31,21 @@
   in section div with 'flex justify-center', div with 'w-8/12 bg-white p-6 rounded-lg' (post)     
 7. Now in migration files with 'up' and 'down' method 
 8. Add db connection name in .env file 
-9. command --> php aritsan migrate    
+9. command --> php aritsan migrate   
+
+3> Third -->
+
+1. Migration To create column in the table
+   command --> php artisan make:migration add_username_to_user_table 
+   --> can also specify --table= or --create to specify the table you are making migration 
+2. In migration file for up method --> $table->string('username')
+3. In down method $table->dropColumn('username')
+4. command --> php artisan migrate:rollback --> to rollback last migration
+5. Create register controller in Auth\RegisterController 
+6. Make 'index' method there and return view 'auth.register'
+7. Define this controller method in route file.
+8. Make the view Auth > 'register.blade.php' copy the content of 'post.blade.php' to this file with change class w-4/12 
+to w-8/12      
 
 
 
