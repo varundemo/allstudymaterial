@@ -55,6 +55,21 @@ to w-8/12
 15. Make a post route for RegisterController with 'store' method with no named route it will inherit the get route
  named route.
 
+4> Forth --> (@csrf, dd, validate(confirm), @error, old, create);
+
+1. Add '@csrf' token in form 
+2. Make 'store' method in which check 'dd' method 
+3. Now use validate method which exist in Controller > BaseController > ValidateRequests > validate 
+4. $this->validate($request, ['name'=> 'required|max:255'])
+5. Other rules --> email, for password --> 'confirmed', this confirm is matched with 'password_confirmation'
+6. Validate method throw exeption when not true 
+7. To add error in view file -->
+    @error('name')  div with text-red-500 mt-2 text-sm   {{ $message }} @enderror
+    Same type error can be shown in-line is well 
+8. Add {{ old('') }} in all input fields 
+9. Now store data in database using User model -->
+    User::create()
+10. For create method we need to defined protected '$fillabe = [..., 'username']' in User Model        
 
 
 
