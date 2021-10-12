@@ -138,7 +138,27 @@ method which throw 'Authenticate exception'
 13. And add posts route for its store method 
 14. check model migration help with --help 
 15. create model with migration and factory -->
-     php artisan make:model Post -m -f         
+     php artisan make:model Post -m -f  
+
+8. Eight --> 
+
+1. Add a foreign key column user_id -->
+2. $table->foreignId('user_id')->constrained()->onDelete('cascade');
+3. Add column text(body) for post migration 
+4. Create table by migrate 
+5. Validate posts body in store method 
+6. Add fillable for body in Post Model 
+7. Relationship b/w user and post
+8. HasMany Relationship -->
+   In User Model -->
+   public function posts(){
+     return $this->hasMany(Post::class);
+   }
+9. Can check this in DashboardController to access user posts -->
+   auth()->user()->posts     --> Return collection    
+8. To add values in post table -->
+9. auth()->user()->posts()->create($request->only('body'))     --> Automatic fill the user_id 
+10. And now--> return back();
 
 
 
