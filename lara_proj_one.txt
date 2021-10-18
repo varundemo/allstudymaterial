@@ -140,7 +140,7 @@ method which throw 'Authenticate exception'
 15. create model with migration and factory -->
      php artisan make:model Post -m -f  
 
-8. Eight --> 
+8. Eight --> (foregin key, contrained, cascade, fillable, hasMany, back())
 
 1. Add a foreign key column user_id -->
 2. $table->foreignId('user_id')->constrained()->onDelete('cascade');
@@ -159,6 +159,28 @@ method which throw 'Authenticate exception'
 8. To add values in post table -->
 9. auth()->user()->posts()->create($request->only('body'))     --> Automatic fill the user_id 
 10. And now--> return back();
+
+9. Nine -->  (get(), collection, count(), belongTo, created_at, carbon instance, toTimeString(), diffForHumans(),
+paginate(), lenghtAwarePaginator, link())
+
+1.Get all the data from Post table in the index method using Post::get() (collection)
+2. Send these posts to the view file.
+3. Form mb-4
+4. In view file to check if posts exist or not.
+    @if($post->count())   (count from the laravel collections)
+5. Use foreach to itrate posts -->
+6. div with mb-4, a with font-bold, span with text-gray-600 text-sm
+7. p with mb-2 --> body 
+8. Create relation belong to in Post model -->
+   return $this->belongTo(User::class);
+9. Now we can use username -->
+   $post->user->name  with add $post->created_at  (this gives us carbon instance)
+10. Carbon --> Date time manipulation library
+11. so using carbon methods --> ->toTimeString()  --> it give only time 
+12. Use --> ->diffForHumans()  -> give the time diff b/w when the post is created 
+13. Now use paginate() method in post controller with arrgument you want to show
+14. It will return 'lengthAwarePaginator'
+15. Add links for paginator --> $posts->links()       
 
 
 
