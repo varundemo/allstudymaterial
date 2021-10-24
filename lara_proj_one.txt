@@ -1,4 +1,4 @@
-1> First --> (yield, extends, section)
+k1> First --> (yield, extends, section)
 
 1. command --> php artisan   --> Tell you about the all the command in laravel 
 2. Create folder in view layouts > app.blade.php 
@@ -180,8 +180,40 @@ paginate(), lenghtAwarePaginator, link())
 12. Use --> ->diffForHumans()  -> give the time diff b/w when the post is created 
 13. Now use paginate() method in post controller with arrgument you want to show
 14. It will return 'lengthAwarePaginator'
-15. Add links for paginator --> $posts->links()       
+15. Add links for paginator --> $posts->links()    
 
+10. Ten --> (Factory, faker, tinker, --create, Str helper, Str::plural, {id}) 
 
-
+1. database > Facatory > PostFactory.php   (This factory was created by -f command earlier by us)
+3. Code to write here defination return is --> 
+            'body'=> $this->faker->sentence(20)
+2. cmd -->
+    php artisan tinker 
+    App\Models\Post::factory()->times(200)->create(['user_id'=>user_id]);
+    --> Now factory details is clear
+3. Add --> 'body'=>$this->faker->sentence(20) in post factory.    
+4. Now under post body -->
+   div with flex item-center, form with mr-1, button with text-blue-500 for Like and Unlike.
+5. cmd --> 
+    php artisan make:migration create_likes_table --create=likes
+6. Add foreign key column in migration file -->
+    $table->foreignId('user_id')->constrained()->onDelete('cascade');
+    $table->foreignId('post_id')->constrained()->onDelete('cascade');
+7. Create a new relation ship in post model -->
+   public function likes(){
+        return $this->hasMany(Likes::class);
+   }
+8. Create a model Like
+9. Add fake data in table manually.
+10. Check in view file {{ $post->likes->count() }} likes
+11. Now pluralize by laravel string helper from Str.php Str class -->
+     Str::plural('like', $post->likes->count() )
+12. Create likes relationship in User model also -->
+     public function likes(){
+        return $this->hasMany(Likes::class);
+     } 
+13. Create a new controller PostLikeController
+14. Make 'store' method in it.
+15. Now make a post route -->
+    'post/{id}/likes'  name->post.likes
 
