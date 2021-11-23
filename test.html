@@ -55,3 +55,14 @@
 </script>
 </body>
 </html>
+
+//    //adding profile photo
+        if($request->hasfile("faculty_photo")){
+          $profile_img = $request->faculty_photo;
+          $imgName = time().".".$profile_img->getClientOriginalName();
+          $profile_img->move("resources/assets/images/faculty/",$imgName);
+          $upload = "resources/assets/images/faculty/".$imgName;
+          print_r($upload);
+          $fac_add_obj->profile_photo = $upload;
+        }
+     //    // adding profile photo
