@@ -11,3 +11,47 @@
     
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .rem_div{
+           animation-name:myanimation;
+           animation-duration: 1s;
+        }
+        @keyframes myanimation {
+            0% {opacity: 1;}
+            100% {opacity: 0;}
+        }
+        div{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="my_div" style=" height: 20vh;">
+        This div is special
+    </div>
+
+    <button id="my_click" class="my_class">Click here</button>
+    
+<script>
+    var ele = document.getElementById("my_click");
+    var my_div = document.getElementById("my_div");
+    ele.addEventListener("click",()=>{
+        // my_div.remove();
+        my_div.classList.add("rem_div");
+        setTimeout(function(){ my_div.remove(); }, 1000);
+        
+    })
+</script>
+</body>
+</html>
