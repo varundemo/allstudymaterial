@@ -66,3 +66,24 @@
           $fac_add_obj->profile_photo = $upload;
         }
      //    // adding profile photo
+
+    <form runat="server">
+        <input accept="image/*" type='file' id="imgInp" />
+        <img id="blah" src="#" alt="your image" style="width: 50%;"/>
+      </form>
+    
+<script>
+   
+    imgInp.onchange = evt => {
+  const [file] = imgInp.files
+  console.log(file);
+  if (file) {
+    blah.src = URL.createObjectURL(file)
+
+  }
+}
+
+my_del.onclick = ()=>{
+    // console.log("no work");
+    blah.src = "";
+}
