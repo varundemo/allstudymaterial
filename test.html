@@ -87,3 +87,21 @@ my_del.onclick = ()=>{
     // console.log("no work");
     blah.src = "";
 }
+
+ public function sendmail(Request $request){
+        // dd($request);
+        // dd($request->email);
+        $viewdata['fname'] = $request->fname;
+        $viewdata['lname'] = $request->lname;
+        $viewdata['email'] = $request->email;
+
+        Mail::send('emailpage', $viewdata, function($m) use($request)
+        {
+            $m->from('ramankumar@gmail.com', env('APP_NAME'));
+            $m->to($request->email)->subject($request->fname)->attach(public_path('pdf/pgi.pdf'),
+                    ['as'=>'sample.pdf',
+                    'mime'=>'application/pdf']
+            );
+            // $m->to([$request->email,'varunkumar11uee058@gmail.com'])->subject($request->fname);
+        });
+    }
