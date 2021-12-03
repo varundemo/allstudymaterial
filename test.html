@@ -126,3 +126,111 @@ $("#cross_val").click(()=>{
     $("#pop").remove();
 });
 </script>
+
+<?php 
+
+// $time1 = new DateTime('09:00:59');
+// $time2 = new DateTime('09:01:00');
+// $interval = $time1->diff($time2);
+// echo $interval->format('%s second(s)');
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "posty";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT created_at FROM POSTS";
+$result = $conn->query($sql);
+
+// die($result);
+// print_r($result[0]['created_at']);
+// die();
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+  	echo "<pre";
+  	print_r($row);
+    // echo . "<br>";
+    $date = new DateTime();
+	// $date = DateTime::format();
+	// echo "<pre>";
+	$exactdate = $date->format('Y-m-d H:i:s');
+	$time1 = new DateTime($row['created_at']);
+	$time2 = new DateTime($exactdate);
+	$timediff = $time1->diff($time2);
+// echo "<pre>";
+// print_r($timediff);
+	echo "<hr>";
+if($timediff->y != 0){
+	echo $timediff->format('%y year')."<br/>";
+}
+else if($timediff->m != 0){
+	echo $timediff->format('%m month')."<br>";	
+}
+else if($timediff->d != 0){
+	echo $timediff->format('%d days')."<br/>";
+}
+else if($timediff->h != 0){
+	echo $timediff->format('%h hour')."<br/>";
+}
+else if($timediff->i != 0){
+	echo $timediff->format('%i minute')."<br/>";
+}
+
+// echo "one";
+
+
+
+
+
+
+  }
+} else {
+  echo "0 results";
+}
+$conn->close();
+
+die();
+
+// echo "<br>";
+// $x = $date->date;
+// $x = strtok($x, '.');
+// echo $x;
+// $str = substr($str, 0, strpos($str, '.'));
+
+
+
+
+// 2021-10-24 12:57:09
+
+
+print_r($timediff->y);
+echo "<hr>";
+if($timediff->y != 0){
+	echo $timediff->format('%y year')."<br/>";
+}
+else if($timediff->m != 0){
+	echo $timediff->format('%m month')."<br>";	
+}
+else if($timediff->d != 0){
+	echo $timediff->format('%d days')."<br/>";
+}
+else if($timediff->h != 0){
+	echo $timediff->format('%h hour')."<br/>";
+}
+else if($timediff->i != 0){
+	echo $timediff->format('%i minute')."<br/>";
+}
+echo "<br>";
+echo $timediff->format('%y year %m month %d days %h hour %i minute %s second')."<br/>";
+echo $timediff->format('%i minute')."<br/>";
+
+?>
