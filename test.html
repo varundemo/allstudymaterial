@@ -442,3 +442,65 @@ public function records(){
        
         return redirect()->back();
     }
+
+
+//To make moving dropdown
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body style="background:black;">
+
+	<h1>Testing Two</h1>
+	<div style="text-align: center;">
+	<select name="" id="" style="width:5rem; height: 2rem; background: red; font-weight: bold; color:white; cursor: pointer;">
+		<option value="" id="op_one">One</option>
+		<option value="" id="op_two" selected="selected" name="one">Two</option>
+		<option value="" id="op_three">Three</option>
+		<option value="" id="op_four">Four</option>
+	</select>
+	</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script>
+		$(document).ready(function(){
+			setInterval(function(){
+                var op_one = document.getElementById("op_one");
+                var op_two = document.getElementById("op_two");
+                var op_three = document.getElementById("op_three");
+                var op_four = document.getElementById("op_four");
+                // console.log(op_two);
+                var check_one = op_one.hasAttribute("selected");
+                var check_two = op_two.hasAttribute("selected");
+                var check_three = op_three.hasAttribute("selected");
+                var check_four = op_four.hasAttribute("selected");
+                // console.log(check);
+                if(check_one){
+                	$("#op_two").attr("selected","selected");
+                     $("#op_one").removeAttr("selected");
+                }
+                if(check_two){
+                	$("#op_three").attr("selected","selected");
+                     $("#op_two").removeAttr("selected");
+                }
+                if(check_three){
+                	$("#op_four").attr("selected","selected");
+                     $("#op_three").removeAttr("selected");
+                }
+                if(check_four){
+                	$("#op_one").attr("selected","selected");
+                     $("#op_four").removeAttr("selected");
+                }
+			}, 2000)
+		})
+	</script>
+	
+</body>
+</html>
+
+
+
