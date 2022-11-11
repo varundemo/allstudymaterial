@@ -1,1 +1,30 @@
-login file 
+SEEDER AND FAKER PACKAGE (seeder, random, range, faker) ---->
+
+1. It is in the database/seeders directory.
+2. run command ->
+php artisan make:seeder StudentSeeder
+--> In this file in 'run' method write a code to add some
+value in database.
+  foreach(range(1,10) as $value) {
+   DB::table('student')->insert([
+	'name'=>'sonam'
+	]);
+      }
+--> now run command ->
+  php artisan db:seed --class=StudentSeedr
+3. Or you can write a code to add this class in 'run' method
+of 'DatabaseSeeder.php' file ->
+	 $this->call([
+	    StudentSeeder::class
+	]);
+--> You can also write multiple class in it.
+4. Now run command->
+   php artisan db:seed
+5. Str::random(10) to create random data.
+6. Faker package
+--> use Faker\Factory as Faker;
+--> Now in StudentSeeder file in run method write -->
+    $faker = Faker::create();
+--> Now get values  
+   $faker->name() , $faker->unique()->safeEmail(), $faker->password()
+-->Get all the data from Gernerator.php file.
