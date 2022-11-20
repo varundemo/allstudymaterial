@@ -28,3 +28,53 @@ of 'DatabaseSeeder.php' file ->
 --> Now get values  
    $faker->name() , $faker->unique()->safeEmail(), $faker->password()
 -->Get all the data from Gernerator.php file.
+
+LARAVEL COMPONENT ----->
+
+1. Class Component -->
+--> php artisan make:component Card   -> (Card in component name)
+--> with this command in resourses/view/components/card.blade.php file is created.
+--> One more file in app/views/Components/Card.php file is generated.
+
+2. To use this component.
+--> Write some code in card.blade.php file.
+--> To use it in blade file -> <x-card />
+
+3. To make it in directory ->
+--> php artisan make:component include/Header 
+--> To use it -> <x-include.header />
+
+4. Passing data to Component ->
+--> <x-card title='card title 1' sub-title='Sub Title 1' :description=$desc />
+--> Now defined in Card.php file -> 
+    public $title;
+    public $subTitle;
+    public $description;
+--> Initialize it in constructor ->
+    public function __constructor($title, $subTitle, $description){
+       $this->title = $title;
+       $this->subTitle = $subTitle;
+       $this->description = $description;
+    }
+--> Now use it in component file ->
+    {{ $title }}
+    {{ $subTitle }}
+    {{ $description }}
+
+5. Component Method ->
+--> In Card.php file ->
+    public function addMethod($a){
+        return $a + 20;
+    }
+--> In card blade file use it as ->
+     {{ addMethod(10) }}
+
+6. <x-card class="myClass" />
+--> If class is not defined in the Card.php file.
+--> Then this data comes in {{ $attribute }} varible directly in the blade file.
+--> To merge class use {{ $attribute->merge(['class'=>'dclass']) }}
+--> This class become default class for this component.
+
+7. Anonymous Component ->
+--> Create a component folder manually and in it card.blade.php file or any other file.
+
