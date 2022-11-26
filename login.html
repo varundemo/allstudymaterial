@@ -78,3 +78,37 @@ LARAVEL COMPONENT ----->
 7. Anonymous Component ->
 --> Create a component folder manually and in it card.blade.php file or any other file.
 
+LARAVEL AJAX PAGE LOAD MORE ----->
+<script>
+        $("#load_more").click(function(){
+            console.log("you click");
+            // let pageno = $("#load_more").attr('data-id');
+            let pageno = $(this).data('id');
+            console.log("dataid",pageno);
+            let urldata = "{{ url('getemp?page=') }}"+pageno;
+            $.get(urldata, (res)=>{
+            console.log(res);
+            
+            let empdata = res.data.map(function(data){
+                    return `<tr><td>${data.id}</td><td>${data.name}</td><tr>`;
+              
+                
+            })
+                console.log("newpage",res.current_page+1);
+                $("#load_more").data('id', (res.current_page+1));
+                let reslen = res.data.length;
+                if(res.data.length > 0){
+                    console.log(empdata, res.data[reslen-1].id);
+                    console.log(empdata);
+                    $("#tdata").append(empdata);
+                }
+                else{
+                    $("#load_more").text("No More Data");
+                    $("#load_more").attr("disabled", true);
+                }
+                
+           
+        })
+        })
+    </script>
+
