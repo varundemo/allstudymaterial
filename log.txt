@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Drag & Drop Using Dropzone With PHP</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dropzone.css">
+</head>
+<body>
+	<div id="main">
+		<div id="header">
+			<h1>Drag & Drop Upload Files<br> Using Dropzone With PHP</h1>
+		</div>
+		<div id="content">
+      <form class="dropzone" id="file_upload"></form>
+      <button id="upload_btn">Upload</button>
+		</div>
+	</div>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/dropzone.js"></script>
+<script>
+    // var uploadedFiles = [];
+
+Dropzone.autoDiscover = false;
+    
+var myDropzone = new Dropzone("#file_upload", { 
+  url: "upload.php",
+  parallelUploads: 3,
+  uploadMultiple: false,
+  maxFilesize:20000,
+  // acceptedFiles: '.png,.jpg,.jpeg,mp4',
+  autoProcessQueue: false,
+  success: function(file, response){
+    if(response == 'true'){
+      $('#content .message').hide();
+      $('#content').append('<div class="message success">Images Uploaded Successfully.</div>');
+    }else{
+      $('#content').append('<div class="message error">Images Can\'t Uploaded.</div>');
+    }
+  },
+  addedfile: function(file) {
+    sendFilesToServer();
+  },
+});
+
+
+function sendFilesToServer() {
+  var fileInput = myDropzone.files;
+  console.log(fileInput);
+  const element = document.querySelector('#file_upload');
+ 
+  let chunkSize = 2*1024*1024; // 2MB
+
+    for(let i=0; i < fileInput.length; i++){
+        console.log("you are in");
+        
+        var file = fileInput[i];
+        console.log("file data: ",file);
+        let start = 0;
+        let end = chunkSize;
+        
+            while(start < file.size){
+                let chunk = file.slice(start, end);
+                let formData = new FormData();
+                formData.append("file", chunk);
+                formData.append("start", start);
+                formData.append("filename", file.name);
+                
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "upload.php", true);
+                var res_url = [];
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+
+                      console.log("you upload this");
+                      let restxt = JSON.parse(xhr.responseText);
+                      console.log(restxt);
+                      res_url = restxt.url;
+                      console.log(res_url);
+                      // return false;
+                        // assume the response from the server is "true"
+                        // if (xhr.responseText == "true") {
+                            // create an <img> element and set its source to the URL of the file
+                            // let img = document.createElement("img");
+                            // img.src = restxt.url;
+                            // append the <img> element to the #file_upload element
+                            // element.appendChild(img);
+                            const htmlCode = `<img src="./database/img_one.jpg" style="width:100px;">`
+                            element.insertAdjacentHTML('beforeend', htmlCode);
+                        // }
+                    }
+                };
+                xhr.send(formData);
+                
+                start = end;
+                end = start + chunkSize;
+            }
+    }
+
+    
+
+}
+  
+  </script>
+</body>
+</html>
+
+
+
+
+php code --->
+
+
+
+<?php
+	ini_set('upload_max_filesize', '2G');
+	/* Create connection*/
+	// $conn = mysqli_connect("localhost", "root", "","drag-upload");
+	$conn = mysqli_connect("localhost", "root", "","dropzonejs");
+
+	/* Check connection*/
+	if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+  }
+//   print_r($_FILES);
+//   die("file daa");
+
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $file = $_FILES['file'];
+    $start = (int)$_POST['start'];
+	$filename = $_POST['filename'];
+
+
+	$fp = fopen("images/{$filename}", "c");
+	fseek($fp, $start);
+	fwrite($fp, file_get_contents($file['tmp_name']) );
+	fclose($fp);
+
+	$new_url = rawurlencode($filename);
+	$path_url = 'http://localhost/dropzonejs/drag_drop_upload/images';
+	$filepath = $path_url.'/'.$new_url;
+	// print_r($file);
+	echo json_encode(array("url" => $filepath));
+}
+
+// die('file uploaded');
+
+//   if($_FILES['file']['name'] != ''){
+	
+	  
+// 	$file_names = $_FILES['file']['name'][0];
+// 	$orig_file_size = $_FILES['file']['size'][0];
+// 	$source = $_FILES['file']['tmp_name'][0];
+
+// 	$extension = pathinfo($file_names,PATHINFO_EXTENSION);
+// 	$new_name = rand() . ".". $extension;
+// 	$destination = "images/" . $new_name;
+
+// 	$chunk_size = 256; // chunk in bytes
+// 	$upload_start = 0;
+	
+// 	$handle = fopen($source, "rb");
+// 	$fp = fopen($destination, 'w');
+
+// 	while($upload_start < $orig_file_size) {
+ 
+// 		$contents = fread($handle, $chunk_size);
+// 		fwrite($fp, $contents);
+	 
+// 		$upload_start += strlen($contents);
+// 		fseek($handle, $upload_start, SEEK_SET);
+// 	}
+
+// 	fclose($handle);
+// 	fclose($fp);
+ 
+// echo "File uploaded successfully.";
+
+
+  	// $file_names = '';
+
+  	// $total = count($_FILES['file']['name']);
+
+  	// for($i=0; $i<$total; $i++){
+  	// 	$filename = $_FILES['file']['name'][$i]; // Get the Uploaded file Name.
+  	// 	$extension = pathinfo($filename,PATHINFO_EXTENSION); //Get the Extension of uploded file
+
+  	// 	$valid_extensions = array("png","jpg","jpeg");
+
+  	// 	if(in_array($extension, $valid_extensions)){ // check if upload file is a valid image file.
+  	// 		$new_name = rand() . ".". $extension;
+  	// 		$path = "images/" . $new_name;
+
+  	// 		move_uploaded_file($_FILES['file']['tmp_name'][$i], $path);
+
+  	// 		$file_names .= $new_name . " , ";
+  	// 	}else{
+  	// 		echo 'false';
+  	// 	}
+  	// }
+    
+    // // Save uploaded images name on database
+  	// $sql = "INSERT INTO uploads(file_name) VALUES('{$file_names}')";
+  	// if(mysqli_query($conn,$sql)){
+  	// 	echo 'true';
+  	// }else{
+  	// 	echo 'false';
+  	// }
+//   }
+
+?>
